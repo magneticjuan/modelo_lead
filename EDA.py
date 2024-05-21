@@ -22,6 +22,11 @@ mapping = {'Alta': 1, 'Media': 0, 'Descalificado': -1}
 df['Calidad_de_lead__c'] = df['Calidad_de_lead__c'].map(mapping)
 print("Mapeo completado")
 
+# Ajuste de Valores
+df['Cuota_Inicial__c'] = df['Cuota_Inicial__c'].apply(fn.ajustar_valores)
+df['ingresos_totales__c'] = df['ingresos_totales__c'].apply(fn.ajustar_valores)
+df['Ingresos_familiares__c'] = df['Ingresos_familiares__c'].apply(fn.ajustar_valores)
+
 # Identificar y mostrar los outliers en cada columna
 print("Identificando outliers...")
 for columna in df.columns:

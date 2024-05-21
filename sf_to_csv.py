@@ -1,15 +1,15 @@
 from simple_salesforce import Salesforce
 import pandas as pd
 from dotenv import load_dotenv
-import os
+from os import getenv
 
 # Cargar variables de entorno desde el archivo .env
-load_dotenv()
+load_dotenv('.env', override=True)
 
 # Obtener credenciales de Salesforce desde las variables de entorno
-USERNAME = 'fcortes@duppla.co'
-PASSWORD = 'DupplaAbr2024'
-SECURITY_TOKEN = 'jFCOlUUQfqObD1JEE92MOpAHp'
+USERNAME = getenv('USERNAME')
+PASSWORD = getenv('PASSWORD')
+SECURITY_TOKEN = getenv('SECURITY_TOKEN')
 
 try:
     # Autenticarse en Salesforce
@@ -20,14 +20,15 @@ try:
     columna_fecha = 'CreatedDate'
     fecha_corte = '2024-01-01T00:00:00Z'
     objeto = 'Lead'
-    campo_1 = 'pctcuota_inicial__c'
+    campo_1 = 'Cuota_Inicial__C'
     campo_2 = 'Presupuesto_inmueble_a_comprar__c'
-    campo_3 = 'de_ingresos_sobre_el_inmueble__c'
-    campo_4 = 'picklist_ciudad__c'
+    campo_3 = 'ingresos_totales__c'
+    campo_4 = 'Ingresos_familiares__c'
     campo_5 = 'Calidad_de_lead__c'
+    campo_6 = 'picklist_ciudad__c'
     
     # Formar la consulta SOQL
-    query = f"SELECT {campo_1}, {campo_2}, {campo_3}, {campo_4}, {campo_5} FROM {objeto} WHERE {columna_fecha} > {fecha_corte}"
+    query = f"SELECT {campo_1}, {campo_2}, {campo_3}, {campo_4}, {campo_5}, {campo_6} FROM {objeto} WHERE {columna_fecha} > {fecha_corte}"
     result = sf.query(query)
     print('Consulta realizada correctamente.')
     
